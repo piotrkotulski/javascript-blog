@@ -118,3 +118,36 @@ body {
     margin: 0 10px 0 0;
   }
 }
+
+.tags{
+  li{
+    display: inline-block;
+    a{
+      text-decoration: none;
+    }
+  }
+}
+.tag-size-1{
+  font-size: x-small;
+  color: brown;
+}
+
+.tag-size-2{
+  font-size: medium;
+  color: darkgreen;
+}
+
+.tag-size-3{
+  font-size: large;
+  color: slateblue;
+}
+
+.tag-size-4{
+font-size: x-large;
+  color: darkorange;
+}
+
+.tag-size-5{
+  font-size: xx-large;
+  color: deepskyblue ;
+}
