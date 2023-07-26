@@ -207,10 +207,21 @@ function generateAuthors() {
     /* znajdź wszystkie artykuły */
     const articles = document.querySelectorAll(optArticleSelector);
 
+    /* stwórz pusty obiekt, który będzie zawierał informacje o liczbie artykułów dla każdego autora */
+    let authorsData = {};
+
     /* dla każdego artykułu */
     for (const article of articles) {
         /* pobierz autora z atrybutu data-author */
         const author = article.getAttribute('data-author');
+
+        /* jeśli autor jest już w obiekcie authorsData, zwiększ licznik artykułów dla tego autora */
+        if (authorsData[author]) {
+            authorsData[author]++;
+        } else {
+            /* jeśli autor nie jest jeszcze w obiekcie authorsData, dodaj go i ustaw licznik na 1 */
+            authorsData[author] = 1;
+        }
 
         /* znajdź wrapper dla autora */
         const authorWrapper = article.querySelector('.post-author');
@@ -218,18 +229,37 @@ function generateAuthors() {
         /* dodaj link autora jako jego zawartość */
         authorWrapper.innerHTML = '<a href="#" data-author="' + author + '">' + author + '</a>';
     }
+
+    /* znajdź listę autorów */
+    const authorList = document.querySelector(optAuthorsListSelector);
+
+    /* stwórz zmienną przechowującą kod HTML dla wszystkich autorów */
+    let allAuthorsHTML = '';
+
+    /* dla każdego autora w obiekcie authorsData */
+    for (const author in authorsData) {
+        /* dodaj link autora wraz z liczbą artykułów do zmiennej allAuthorsHTML */
+        allAuthorsHTML += '<li><a href="#" data-author="' + author + '">' + author + ' (' + authorsData[author] + ')</a></li>';
+    }
+
+    /* wstaw kod HTML z linkami autorów do listy autorów */
+    authorList.innerHTML = allAuthorsHTML;
 }
 
-function addClickListenersToAuthors() {
-    /* znajdź wszystkie linki autorów */
-    const authorLinks = document.querySelectorAll('.post-author a');
 
-    /* dla każdego linku autora */
+
+function addClickListenersToAuthors() {
+    /* znajdź wszystkie linki autorów w prawej kolumnie */
+    const authorLinks = document.querySelectorAll(optAuthorsListSelector + ' a');
+
+    /* dla każdego linku autora w prawej kolumnie */
     for (const authorLink of authorLinks) {
         /* dodaj click event listener z funkcją authorClickHandler */
         authorLink.addEventListener('click', authorClickHandler);
     }
 }
+
+
 
 function authorClickHandler(event) {
     event.preventDefault();
@@ -238,7 +268,7 @@ function authorClickHandler(event) {
     const author = clickedElement.getAttribute('data-author');
 
     /* usuń klasę 'active' ze wszystkich linków autorów */
-    const activeAuthorLinks = document.querySelectorAll('.post-author a.active');
+    const activeAuthorLinks = document.querySelectorAll(optAuthorsListSelector + ' a.active');
     for (const activeAuthorLink of activeAuthorLinks) {
         activeAuthorLink.classList.remove('active');
     }
@@ -249,3 +279,5 @@ function authorClickHandler(event) {
     /* wywołaj funkcję generateTitleLinks z odpowiednim argumentem */
     generateTitleLinks('[data-author="' + author + '"]');
 }
+
+
