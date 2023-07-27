@@ -249,7 +249,7 @@ function generateAuthors() {
 
 function addClickListenersToAuthors() {
     /* znajdź wszystkie linki autorów w prawej kolumnie */
-    const authorLinks = document.querySelectorAll(optAuthorsListSelector + ' a');
+    const authorLinks = document.querySelectorAll('a[data-author]');
 
     /* dla każdego linku autora w prawej kolumnie */
     for (const authorLink of authorLinks) {
