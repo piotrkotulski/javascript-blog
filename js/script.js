@@ -1,6 +1,7 @@
 const templates = {
     articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
     tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
+    authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML),
     tagCloudLink: Handlebars.compile(document.querySelector('#template-tag-cloud-link').innerHTML)
 };
 const titleClickHandler = function (event) {
@@ -122,9 +123,7 @@ function generateTags() {
         for (let tag of articleTagsArray) {
 
             /* generate HTML of the link */
-            //const tagHTML = '<li><a href="#tag-' + tag + '">' + tag + '</a></li> ';
             const tagHTMLData = {tagName: tag};
-            console.log(tagHTMLData);
             const tagHTML = templates.tagLink(tagHTMLData);
 
             /* add generated code to html variable */
@@ -239,7 +238,8 @@ function generateAuthors() {
         const authorWrapper = article.querySelector('.post-author');
 
         /* dodaj link autora jako jego zawartość */
-        authorWrapper.innerHTML = '<a href="#" data-author="' + author + '">' + author + '</a>';
+        const tagHTMLData = {authorName: author};
+        authorWrapper.innerHTML =  templates.authorLink(tagHTMLData);
     }
 
     /* znajdź listę autorów */

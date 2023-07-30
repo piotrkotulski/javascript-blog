@@ -198,6 +198,11 @@
     <li><a href="#tag-' + {{ tagName }} + '">{{ tagName }}</a></li>
 </script>
 
+<script id="template-author-link" type="text/x-handlebars-template">
+    <a href="#" data-author="{{ authorName }}">{{ authorName }}</a>
+</script>
+
+
 <script id="template-tag-cloud-link" type="text/x-handlebars-template">
     {{#each tags}}
         <li><a href = "#tag-{{tag}}" class="{{className}}"><span>{{tag}}</span></a></li>
