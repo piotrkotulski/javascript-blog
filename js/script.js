@@ -252,11 +252,11 @@ function generateAuthors() {
     /* dla każdego autora w obiekcie authorsData */
     for (const author in authorsData) {
         /* dodaj link autora wraz z liczbą artykułów do zmiennej allAuthorsHTML */
-       // allAuthorsHTML += '<li><a href="#" data-author="' + author + '">' + author + ' (' + authorsData[author] + ')</a></li>';
+
         allAuthorsHTML.authors.push({
             author: author,
             count: authorsData[author]
-        })
+        });
     }
 
     /* wstaw kod HTML z linkami autorów do listy autorów */
